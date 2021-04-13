@@ -3,6 +3,6 @@ provider "aws" {
 }
 
 module "test" {
-  source                    = "../../"
-  s3_bucket_name            = "uniquenameofyours3bucket"
+  source         = "../../"
+  s3_bucket_name = var.s3_bucket_name
 }

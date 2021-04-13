@@ -1,17 +1,17 @@
 ############ S3 VARIABLES ############ 
+variable "s3_bucket_name" {
+  description = "S3 bucket name to store AWS logs in."
+  type        = string
+}
+
 variable "s3_bucket_acl" {
   description = "Set bucket ACL"
   default     = "log-delivery-write"
   type        = string
 }
 
-variable "s3_bucket_name" {
-  description = "S3 bucket to store AWS logs in."
-  type        = string
-}
-
 variable "versioning" {
-  description = "Enable versioning on s3 bucket or not. default = false"
+  description = "Enable versioning on s3 bucket"
   type        = bool
   default     = false
 }
@@ -54,24 +54,36 @@ variable "config_name" {
   description = "The name of the aws config instance"
 }
 
-variable "aggregate_to_multi_region" {
-  type        = bool
-  default     = false
-  description = "enable config on multi-region/multi-account or not"
-}
-
-variable "list_of_regions" {
-  type    = list(string)
-  default = [""]
-}
-
-variable "list_of_account_ids" {
-  type    = list(string)
-  default = [""]
-}
 
 variable "tags" {
   type        = map(string)
-  description = "map tags to be used when creating Security Group and vpc endpoints to that SG"
+  description = "map tags to be used on s3 bucket and aggregator"
   default     = {}
+}
+
+############ AGGREGATOR VARIABLES ############
+variable "create_aggregator" {
+  type        = bool
+  default     = false
+  description = "Enable this to aggregate with either account or organisation source. Also choose regions or all regions"
+}
+
+variable "account_aggregation_source" {
+  description = "Object of account sources to aggregate"
+  type = object({
+    account_ids = list(string)
+    all_regions = bool
+    regions     = list(string)
+  })
+  default = null
+}
+
+variable "organization_aggregation_source" {
+  description = "Object with the AWS Organization configuration for the Config Aggregator"
+  type = object({
+    all_regions = bool
+    regions     = list(string)
+    role_arn    = string
+  })
+  default = null
 }
