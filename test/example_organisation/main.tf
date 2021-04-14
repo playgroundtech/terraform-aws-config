@@ -5,7 +5,7 @@ provider "aws" {
 
 module "organization_aggregation" {
   source            = "../../"
-  s3_bucket_name    = "uniquenameofyours3bucket123"
+  s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   organization_aggregation_source = ({
     all_regions = true

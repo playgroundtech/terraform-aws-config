@@ -12,7 +12,7 @@ Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/c
 ```hcl
 module "test" {
   source = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
-  s3_bucket_name = "unique_name_of_your_s3_bucket"
+  s3_bucket_name = "unique-name-of-your-s3-bucket"
 }
 ```
 
@@ -20,7 +20,7 @@ module "test" {
 ```hcl
 module "account_aggregation" {
   source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
-  s3_bucket_name    = "unique_name_of_your_s3_bucket"
+  s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   account_aggregation_source = ({
     account_ids = ["123456789101"]
@@ -35,7 +35,7 @@ module "account_aggregation" {
 ```hcl
 module "organization_aggregation" {
   source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
-  s3_bucket_name    = "unique_name_of_your_s3_bucket"
+  s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   organisation_aggregation_source = ({
     all_regions = true

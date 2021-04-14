@@ -5,7 +5,7 @@ provider "aws" {
 
 module "account_aggregation" {
   source            = "../../"
-  s3_bucket_name    = "uniquenameofyours3bucket"
+  s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   account_aggregation_source = ({
     account_ids = ["123456789101"]
