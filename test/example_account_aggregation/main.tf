@@ -8,7 +8,7 @@ module "account_aggregation" {
   s3_bucket_name    = "uniquenameofyours3bucket"
   create_aggregator = true
   account_aggregation_source = ({
-    account_ids = ["127745533311"]
+    account_ids = ["123456789101"]
     all_regions = false
     regions     = ["eu-north-1"]
   })

@@ -4,16 +4,10 @@ variable "s3_bucket_name" {
   type        = string
 }
 
-variable "s3_bucket_acl" {
-  description = "Set bucket ACL"
-  default     = "log-delivery-write"
-  type        = string
-}
-
 variable "versioning" {
   description = "Enable versioning on s3 bucket"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "config_delivery_frequency" {
@@ -55,21 +49,28 @@ variable "config_name" {
 }
 
 
-variable "tags" {
+variable "s3_tags" {
   type        = map(string)
-  description = "map tags to be used on s3 bucket and aggregator"
+  description = "map tags to be used on s3 bucket"
   default     = {}
 }
 
 ############ AGGREGATOR VARIABLES ############
+
+variable "agg_tags" {
+  type        = map(string)
+  description = "map tags to be used on aggregator resource"
+  default     = {}
+}
+
 variable "create_aggregator" {
   type        = bool
   default     = false
-  description = "Enable this to aggregate with either account or organisation source. Also choose regions or all regions"
+  description = "Enable this to aggregate with either account or organisation source."
 }
 
 variable "account_aggregation_source" {
-  description = "Object of account sources to aggregate"
+  description = "Object of account sources to aggregate. Either regions or all_regions must be specified. If used, create_aggregator must be set to true."
   type = object({
     account_ids = list(string)
     all_regions = bool
@@ -79,7 +80,7 @@ variable "account_aggregation_source" {
 }
 
 variable "organization_aggregation_source" {
-  description = "Object with the AWS Organization configuration for the Config Aggregator"
+  description = "Object with the AWS Organization configuration for the Config Aggregator. Either regions or all_regions must be specified. If used, create_aggregator must be set to true."
   type = object({
     all_regions = bool
     regions     = list(string)

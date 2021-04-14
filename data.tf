@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "data_policy" {
     actions = ["s3:*"]
     effect  = "Allow"
     resources = [
-      "arn:aws:s3:::*",
+      "arn:aws:s3:::${var.s3_bucket_name}",
     ]
   }
 }

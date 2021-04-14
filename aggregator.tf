@@ -1,7 +1,7 @@
 resource "aws_config_configuration_aggregator" "this" {
   count = var.create_aggregator ? 1 : 0
   name  = "${var.config_name}-aggregator-role"
-  tags  = var.tags
+  tags  = var.agg_tags
 
   dynamic "account_aggregation_source" {
     for_each = var.account_aggregation_source != null ? [var.account_aggregation_source] : []

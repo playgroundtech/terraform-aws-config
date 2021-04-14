@@ -1,9 +1,9 @@
 resource "aws_s3_bucket" "aws_logs" {
   bucket        = var.s3_bucket_name
-  acl           = var.s3_bucket_acl
+  acl           = "log-delivery-write"
   force_destroy = true
 
-  tags = var.tags
+  tags = var.s3_tags
   versioning {
     enabled = var.versioning
   }
