@@ -93,28 +93,21 @@ module "organization_aggregation" {
   Enable this to aggregate with either account or organisation source. If set to true, `account_aggregation_source` or `organization_aggregation_source` must also be set.      
   Default: false
 
-- `account_aggregation_source` | (Optional) - Object   
-    ```hcl
-    object({   
-      account_ids = list(string)   
-      all_regions = bool   
-      regions = list(string)  
-  })
-  default: null      
-  ```    
+- `account_aggregation_source` | (Optional) - Object  
+  - `account_ids` = `list(string)` a list of all account IDs.
+  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with regions.
+  - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions` 
+ 
   Object of account sources to aggregate. Either regions or all_regions must be specified.   
   If used, create_aggregator must be set to true.   
   Default: Null  
   [Look at this example](./test/example_account_aggregation/main.tf)
 - `organization_aggregation_source` | (Optional) - Object      
-    ```hcl
-    object({   
-      all_regions = bool  
-      regions     = list(string)  
-      role_arn    = string   
-    })
-    default: null 
-  ```
+   - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with regions.
+  - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions` 
+  - `role_arn` = `string` The role arn with organisation permissions.
+  EG "service-role/AWSConfigRoleForOrganizations"
+ 
       
   Object with the AWS Organization configuration for the Config Aggregator. Either regions or all_regions must be specified.     
   If used, create_aggregator must be set to true.  

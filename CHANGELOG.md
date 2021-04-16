@@ -1,13 +1,13 @@
-# 0.0.0 (Unreleased or Date)
+# 0.0.1 (Unreleased or Date)
 
 FEATURES
 
-- features included in this release
+- initial release for aws config
 
 ENHANCEMENTS
 
-- any enhancements done 
+- initial release for aws config
 
 BUG FIXES
 
-- eventual bugfixes this release addresses 
+- initial release for aws config
