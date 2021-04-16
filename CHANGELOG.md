@@ -1,4 +1,4 @@
-# 0.0.1 (Unreleased or Date)
+# 0.0.1 (Unreleased)
 
 FEATURES
 
