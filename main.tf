@@ -1,4 +1,5 @@
 resource "aws_s3_bucket" "aws_logs" {
+  count         = var.create_bucket == false ? 0 : 1
   bucket        = var.s3_bucket_name
   acl           = "log-delivery-write"
   force_destroy = true
