@@ -6,7 +6,7 @@ variable "s3_bucket_name" {
 
 variable "create_bucket" {
   type        = bool
-  description = "Set to true to create a new bucket or not."
+  description = "Set to true to create a new bucket or to use an existing one to send logs to."
   default     = true
 }
 
