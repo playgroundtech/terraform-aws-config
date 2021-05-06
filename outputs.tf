@@ -1,6 +1,6 @@
-output "aws_logs_bucket" {
+output "aws_logs_bucket_arn" {
   description = "ID of the S3 bucket containing AWS logs."
-  value       = aws_s3_bucket.aws_logs.id
+  value       = local.bucket_arn
 }
 
 output "aws_config_role_arn" {
