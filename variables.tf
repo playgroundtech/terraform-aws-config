@@ -4,6 +4,12 @@ variable "s3_bucket_name" {
   type        = string
 }
 
+variable "create_bucket" {
+  type        = bool
+  description = "Set to true to create a new bucket or not."
+  default     = true
+}
+
 variable "versioning" {
   description = "Enable versioning on s3 bucket"
   type        = bool
