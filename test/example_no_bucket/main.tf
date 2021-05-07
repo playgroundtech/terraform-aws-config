@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "aws_logs" {
 module "test" {
   source         = "../../"
   config_name    = var.config_name
-  s3_bucket_name = var.s3_bucket_name
+  s3_bucket_name = aws_s3_bucket.aws_logs.id
   create_bucket  = false
 
   create_aggregator = true
