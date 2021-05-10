@@ -4,6 +4,8 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
+# represents your already existing s3 bucket
+
 resource "aws_s3_bucket" "aws_logs" {
   bucket        = var.s3_bucket_name
   acl           = "log-delivery-write"

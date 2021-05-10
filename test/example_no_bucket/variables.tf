@@ -1,9 +1,9 @@
 variable "config_name" {
   type    = string
-  default = "test-config-8ka8sdwjdsfffasdf"
+  default = "name-of-your-config"
 }
 
 variable "s3_bucket_name" {
   type    = string
-  default = "test-bucket-8ka8sdwjdsfffasdf"
+  default = "unique-name-of-s3"
 }

@@ -49,6 +49,23 @@ module "organization_aggregation" {
 }
 
 ```
+#### With already existing bucket
+
+```hcl
+module "existing_bucket" {
+  source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
+  s3_bucket_name    = var.s3_bucket_name
+  create_bucket     = false
+
+  create_aggregator = true
+  account_aggregation_source = ({
+    account_ids = ["123456789101"]
+    all_regions = true
+    regions     = null
+  })
+}
+
+```
 
 ### Variables:
 
@@ -103,23 +120,25 @@ module "organization_aggregation" {
 - `account_aggregation_source` | (Optional) - Object
 
   - `account_ids` = `list(string)` a list of all account IDs.
-  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with regions.
-  - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions`
+  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
+  - `regions` = `list(string)` List of source regions being aggregated. Conficts with `all_regions`
 
-  Object of account sources to aggregate. Either regions or all_regions must be specified.
-  If used, create_aggregator must be set to true.  
+  Object of account sources to aggregate. Either `regions` or `all_regions` must be specified.  
+  If used, `create_aggregator` must be set to true.  
+  If `all_regions` is set to true, `regions` must be null.  
   Default: Null  
   [Look at this example](./test/example_account_aggregation/main.tf)
 
 - `organization_aggregation_source` | (Optional) - Object
 
-  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with regions.
+  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
   - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions`
   - `role_arn` = `string` The role arn with organisation permissions.
     EG "service-role/AWSConfigRoleForOrganizations"
 
-  Object with the AWS Organization configuration for the Config Aggregator. Either regions or all_regions must be specified.  
-  If used, create_aggregator must be set to true.  
+  Object with the AWS Organization configuration for the Config Aggregator. Either `regions` or `all_regions` must be specified.  
+  If used, `create_aggregator` must be set to true.   
+  If `all_regions` is set to true, `regions` must be null.
   Default: Null  
   [Look at this example](./test/example_organisation_aggregation/main.tf)
 
