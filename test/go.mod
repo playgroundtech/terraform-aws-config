@@ -1,4 +1,4 @@
-module github.com/playgroundcloud/terraform-aws-config
+module github.com/playgroundtech/terraform-aws-config
 
 go 1.15
 
