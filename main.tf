@@ -1,4 +1,6 @@
+
 resource "aws_s3_bucket" "aws_logs" {
+  count         = var.create_bucket == false ? 0 : 1
   bucket        = var.s3_bucket_name
   acl           = "log-delivery-write"
   force_destroy = true
@@ -42,7 +44,7 @@ resource "aws_s3_bucket" "aws_logs" {
 ###############  CONFIG  ###############
 resource "aws_config_delivery_channel" "config_DC" {
   name           = var.config_name
-  s3_bucket_name = aws_s3_bucket.aws_logs.bucket
+  s3_bucket_name = var.create_bucket == true ? aws_s3_bucket.aws_logs[0].id : var.s3_bucket_name
   sns_topic_arn  = aws_sns_topic.sns_config.arn
   depends_on     = [aws_config_configuration_recorder.conf_recorder]
   snapshot_delivery_properties {

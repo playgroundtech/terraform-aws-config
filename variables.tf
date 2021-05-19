@@ -4,6 +4,12 @@ variable "s3_bucket_name" {
   type        = string
 }
 
+variable "create_bucket" {
+  type        = bool
+  description = "Set to true to create a new bucket or to use an existing one to send logs to."
+  default     = true
+}
+
 variable "versioning" {
   description = "Enable versioning on s3 bucket"
   type        = bool
@@ -66,7 +72,7 @@ variable "agg_tags" {
 variable "create_aggregator" {
   type        = bool
   default     = false
-  description = "Enable this to aggregate with either account or organisation source."
+  description = "Enable this to aggregate with either account or organization source."
 }
 
 variable "account_aggregation_source" {
