@@ -72,7 +72,7 @@ variable "agg_tags" {
 variable "create_aggregator" {
   type        = bool
   default     = false
-  description = "Enable this to aggregate with either account or organisation source."
+  description = "Enable this to aggregate with either account or organization source."
 }
 
 variable "account_aggregation_source" {

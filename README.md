@@ -2,7 +2,7 @@
 
 This module sets up AWS Config and an s3 bucket for historical configuration changes.
 Also have the option to setup config on all regions or mutiple regions via the aggregator resource.
-With the aggregator resource you also have the ability to setup multi accounts, and even oraganisation wide if you have the persmissions.  
+With the aggregator resource you also have the ability to setup multi accounts, and even oraganization wide if you have the persmissions.  
 Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html).
 
 ![image](./test/picture/config.png)
@@ -13,7 +13,7 @@ Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/c
 
 ```hcl
 module "test" {
-  source = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
+  source = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
   s3_bucket_name = "unique-name-of-your-s3-bucket"
 }
 ```
@@ -22,7 +22,7 @@ module "test" {
 
 ```hcl
 module "account_aggregation" {
-  source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
+  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
   s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   account_aggregation_source = ({
@@ -38,10 +38,10 @@ module "account_aggregation" {
 
 ```hcl
 module "organization_aggregation" {
-  source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
+  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
   s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
-  organisation_aggregation_source = ({
+  organization_aggregation_source = ({
     all_regions = true
     regions     = null
     role_arn    = module.organization_aggregation.aws_config_role_arn
@@ -53,7 +53,7 @@ module "organization_aggregation" {
 
 ```hcl
 module "existing_bucket" {
-  source            = "git@github.com:playgroundcloud/terraform-aws-config.git?ref=vX.Y.Z"
+  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
   s3_bucket_name    = var.s3_bucket_name
   create_bucket     = false
 
@@ -114,7 +114,7 @@ module "existing_bucket" {
   Default: {}
 
 - `create_aggregator` | (Optional) - Bool  
-  Enable this to aggregate with either account or organisation source. If set to true, `account_aggregation_source` or `organization_aggregation_source` must also be set.  
+  Enable this to aggregate with either account or organization source. If set to true, `account_aggregation_source` or `organization_aggregation_source` must also be set.  
   Default: false
 
 - `account_aggregation_source` | (Optional) - Object
@@ -133,14 +133,14 @@ module "existing_bucket" {
 
   - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
   - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions`
-  - `role_arn` = `string` The role arn with organisation permissions.
+  - `role_arn` = `string` The role arn with organization permissions.
     EG "service-role/AWSConfigRoleForOrganizations"
 
   Object with the AWS Organization configuration for the Config Aggregator. Either `regions` or `all_regions` must be specified.  
   If used, `create_aggregator` must be set to true.   
   If `all_regions` is set to true, `regions` must be null.
   Default: Null  
-  [Look at this example](./test/example_organisation_aggregation/main.tf)
+  [Look at this example](./test/example_organization_aggregation/main.tf)
 
 ### Outputs
 
