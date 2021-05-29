@@ -7,32 +7,50 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+---
+name: Bug report
+about: Create a report to help us improve
 
-**To Reproduce**
+---
+
+## Description
+
+Please provide a clear and concise description of the issue you are encountering, your current setup, and what steps led up to the issue. If you can provide a reproduction, that will help tremendously.
+
+## ⚠️ Note
+
+Before you submit an issue, please perform the following first:
+
+1. Remove the local `.terraform` directory (! ONLY if state is stored remotely, which hopefully you are following that best practice!): `rm -rf .terraform/`
+2. Re-initialize the project root to pull down modules: `terraform init`
+3. Re-attempt your terraform plan or apply and check if the issue still persists
+
+## Versions
+<!-- REQUIRED -->
+ - Terraform:
+<!-- Execute terraform -version -->
+ - Provider(s):
+<!-- Execute: terraform providers -version -->
+ - Module:
+
+## Reproduction
+<!-- REQUIRED -->
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+<!-- Are you using workspaces? -->
+<!-- Have you cleared the local cache (see Notice section above)? -->
+<!-- List steps in order that led up to the issue you encountered -->
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+### Code Snippet to Reproduce
+<!-- Optional but very helpful -->
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Expected behavior
+<!-- A clear and concise description of what you expected to happen -->
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Actual behavior
+<!-- A clear and concise description of what actually happened -->
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+### Terminal Output Screenshot(s)
+<!-- Optional but helpful -->
 
-**Additional context**
-Add any other context about the problem here.
+## Additional context
+<!-- Add any other context about the problem here -->
