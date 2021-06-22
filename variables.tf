@@ -94,3 +94,17 @@ variable "organization_aggregation_source" {
   })
   default = null
 }
+
+############ IAM VARIABLES ############
+
+variable "config_role_name" {
+  description = "The name of the config role"
+  type = string
+  default = "config_role"
+}
+
+variable "config_iam_policy_name" {
+  description = "The name of the config role policy"
+  type = string
+  default = "allow_s3_policy_to_config_role"
+}

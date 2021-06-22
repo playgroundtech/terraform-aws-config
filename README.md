@@ -1,8 +1,11 @@
-# terraform-aws-config
+![terratest](https://github.com/playgroundcloud/terraform-aws-config/workflows/terratest/badge.svg)
+![terraform fmt](https://github.com/playgroundcloud/terraform-aws-config/workflows/terraform-fmt/badge.svg)
+![terraform validate](https://github.com/playgroundcloud/terraform-aws-config/workflows/terraform-validate/badge.svg)
+# Terraform AWS Config
 
-This module sets up AWS Config and an s3 bucket for historical configuration changes.
-Also have the option to setup config on all regions or mutiple regions via the aggregator resource.
-With the aggregator resource you also have the ability to setup multi accounts, and even oraganization wide if you have the persmissions.  
+This module sets up AWS Config, and a s3 bucket for historical configuration changes.
+Also have the option to set up config on all regions or multiple regions via the aggregator resource.
+With the aggregator resource you also have the ability to set up multi accounts, and even organization wide if you have the permissions.  
 Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/config/latest/developerguide/aggregate-data.html).
 
 ![image](./test/picture/config.png)
@@ -101,15 +104,15 @@ module "existing_bucket" {
   Number of days after which to expunge the objects  
   Default: 90
 
-- `config_name` | (Optional) - string  
+- `config_name` | (Optional) - String  
   The name of the aws config instance  
   Default: "aws_config"
 
-- `s3_tags` | (Optional) - map(string)  
+- `s3_tags` | (Optional) - Map(String)  
   Map tags to be used on s3 bucket  
   Default: {}
 
-- `agg_tags` | (Optional) - map(string)  
+- `agg_tags` | (Optional) - Map(String)  
   Map tags to be used on aggregation resource  
   Default: {}
 
@@ -119,31 +122,47 @@ module "existing_bucket" {
 
 - `account_aggregation_source` | (Optional) - Object
 
-  - `account_ids` = `list(string)` a list of all account IDs.
-  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
-  - `regions` = `list(string)` List of source regions being aggregated. Conficts with `all_regions`
+  - `account_ids` = `list(string)`   
+    A list of all account IDs.  
+  - `all_regions` = `bool`  
+    If true, aggregate existing AWS Config regions and future regions. Conflicts with `regions`.  
+  - `regions` = `list(string)`  
+    List of source regions to be aggregated. Conflicts with `all_regions`    
 
   Object of account sources to aggregate. Either `regions` or `all_regions` must be specified.  
   If used, `create_aggregator` must be set to true.  
-  If `all_regions` is set to true, `regions` must be null.  
+  If `all_regions` is set to true, `regions` must be null.    
   Default: Null  
   [Look at this example](./test/example_account_aggregation/main.tf)
 
 - `organization_aggregation_source` | (Optional) - Object
 
-  - `all_regions` = `bool` If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
-  - `regions` = `list(string)`List of source regions being aggregated. Conficts with `all_regions`
-  - `role_arn` = `string` The role arn with organization permissions.
+  - `all_regions` = `bool`  
+    If true, aggregate existing AWS Config regions and future regions. Conficts with `regions`.
+  - `regions` = `list(string)`  
+    List of source regions being aggregated. Conficts with `all_regions`
+  - `role_arn` = `string`   
+    The role arn with organization permissions.
     EG "service-role/AWSConfigRoleForOrganizations"
 
   Object with the AWS Organization configuration for the Config Aggregator. Either `regions` or `all_regions` must be specified.  
   If used, `create_aggregator` must be set to true.   
   If `all_regions` is set to true, `regions` must be null.
   Default: Null  
-  [Look at this example](./test/example_organization_aggregation/main.tf)
+  [Look at this example](./test/example_organization_aggregation/main.tf)  
+  
+  
+- `config_role_name` | (Optional) - String  
+  The name of the config role.  
+  _Default: "config_role"_
 
+- `config_iam_policy_name` | (Optional) - String  
+  The name of the config role policy.  
+  _Default: "allow_s3_policy_to_config_role"_
+  
 ### Outputs
 
 - `aws_logs_bucket_arn`
 - `aws_config_role_arn`
 - `aws_config_role_name`
+- `aws_config_role_id`

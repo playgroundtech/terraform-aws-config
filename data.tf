@@ -11,6 +11,7 @@ data "aws_s3_bucket" "aws_logs" {
 # process bucket arn 
 locals {
   bucket_arn = var.create_bucket == true ? aws_s3_bucket.aws_logs[0].arn : data.aws_s3_bucket.aws_logs[0].arn
+  bucket_id = var.create_bucket == true ? aws_s3_bucket.aws_logs[0].id : data.aws_s3_bucket.aws_logs[0].id
 }
 
 data "aws_iam_policy_document" "role" {
