@@ -55,6 +55,8 @@ func TestConfigExampleMinimal(t *testing.T) {
 		actualStatus := aws.GetS3BucketVersioning(t, awsRegion, bucketID)
 		expectedStatus := "Enabled"
 		assert.Equal(t, expectedStatus, actualStatus)
+
+		terraform.ApplyAndIdempotent(t, terraformOptions)
 	})
 }
 
@@ -107,5 +109,7 @@ func TestConfigNoBucket(t *testing.T) {
 		actualStatus := aws.GetS3BucketVersioning(t, awsRegion, bucketID)
 		expectedStatus := "Enabled"
 		assert.Equal(t, expectedStatus, actualStatus)
+
+		terraform.ApplyAndIdempotent(t, terraformOptions)
 	})
 }
