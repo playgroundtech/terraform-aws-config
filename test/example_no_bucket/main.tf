@@ -34,7 +34,7 @@ module "test" {
     all_regions = true
     regions     = null
   })
-  config_role_name = var.config_role_name
+  config_role_name       = var.config_role_name
   config_iam_policy_name = var.config_iam_policy_name
 
   depends_on = [
