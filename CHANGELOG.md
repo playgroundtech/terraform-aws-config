@@ -1,4 +1,4 @@
-# 1.0.0 (realeased) 2021-05-10
+# 1.0.0 (realeased) 2021-06-24
 FEATURES
 
 - Added option to use an already existing S3 bucket instead of creating a new

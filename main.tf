@@ -1,4 +1,3 @@
-
 resource "aws_s3_bucket" "aws_logs" {
   count         = var.create_bucket == false ? 0 : 1
   bucket        = var.s3_bucket_name
@@ -64,14 +63,13 @@ resource "aws_config_configuration_recorder_status" "conf_recorder_status" {
 }
 
 ###############  POLICYS  ###############
-
 resource "aws_iam_role" "config_role" {
-  name               = "config_role"
+  name               = var.config_role_name
   assume_role_policy = data.aws_iam_policy_document.role.json
 }
 
 resource "aws_iam_policy" "allow_s3_policy" {
-  name        = "allow_s3_policy_to_config_role"
+  name        = var.config_iam_policy_name
   description = "Policy which allows the config role s3:* permissions."
   path        = "/"
   policy      = data.aws_iam_policy_document.data_policy.json

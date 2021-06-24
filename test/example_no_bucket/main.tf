@@ -4,12 +4,14 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-# represents your already existing s3 bucket
-
+# This represents your already existing s3 bucket
 resource "aws_s3_bucket" "aws_logs" {
   bucket        = var.s3_bucket_name
   acl           = "log-delivery-write"
   force_destroy = true
+  versioning {
+    enabled = true
+  }
 
   server_side_encryption_configuration {
     rule {
@@ -32,8 +34,14 @@ module "test" {
     all_regions = true
     regions     = null
   })
+  config_role_name       = var.config_role_name
+  config_iam_policy_name = var.config_iam_policy_name
 
   depends_on = [
     aws_s3_bucket.aws_logs
   ]
+}
+
+output "aws_logs_bucket_id" {
+  value = aws_s3_bucket.aws_logs.id
 }
