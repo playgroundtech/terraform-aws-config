@@ -16,7 +16,8 @@ Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/c
 
 ```hcl
 module "test" {
-  source = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
+  source  = "playgroundtech/config/aws"
+  version = "1.0.0"
   s3_bucket_name = "unique-name-of-your-s3-bucket"
 }
 ```
@@ -25,7 +26,8 @@ module "test" {
 
 ```hcl
 module "account_aggregation" {
-  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
+  source  = "playgroundtech/config/aws"
+  version = "1.0.0"
   s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   account_aggregation_source = ({
@@ -41,7 +43,8 @@ module "account_aggregation" {
 
 ```hcl
 module "organization_aggregation" {
-  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
+  source  = "playgroundtech/config/aws"
+  version = "1.0.0"
   s3_bucket_name    = "unique-name-of-your-s3-bucket"
   create_aggregator = true
   organization_aggregation_source = ({
@@ -56,7 +59,8 @@ module "organization_aggregation" {
 
 ```hcl
 module "existing_bucket" {
-  source            = "git@github.com:playgroundtech/terraform-aws-config.git?ref=vX.Y.Z"
+  source  = "playgroundtech/config/aws"
+  version = "1.0.0"
   s3_bucket_name    = var.s3_bucket_name
   create_bucket     = false
 
