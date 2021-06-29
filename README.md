@@ -16,8 +16,8 @@ Read more about data aggregation in the [aws docs](https://docs.aws.amazon.com/c
 
 ```hcl
 module "test" {
-  source  = "playgroundtech/config/aws"
-  version = "1.0.0"
+  source         = "playgroundtech/config/aws"
+  version        = "1.0.0"
   s3_bucket_name = "unique-name-of-your-s3-bucket"
 }
 ```
@@ -26,10 +26,10 @@ module "test" {
 
 ```hcl
 module "account_aggregation" {
-  source  = "playgroundtech/config/aws"
-  version = "1.0.0"
-  s3_bucket_name    = "unique-name-of-your-s3-bucket"
-  create_aggregator = true
+  source                     = "playgroundtech/config/aws"
+  version                    = "1.0.0"
+  s3_bucket_name             = "unique-name-of-your-s3-bucket"
+  create_aggregator          = true
   account_aggregation_source = ({
     account_ids = ["123456789101"]
     all_regions = false
@@ -43,10 +43,10 @@ module "account_aggregation" {
 
 ```hcl
 module "organization_aggregation" {
-  source  = "playgroundtech/config/aws"
-  version = "1.0.0"
-  s3_bucket_name    = "unique-name-of-your-s3-bucket"
-  create_aggregator = true
+  source                          = "playgroundtech/config/aws"
+  version                         = "1.0.0"
+  s3_bucket_name                  = "unique-name-of-your-s3-bucket"
+  create_aggregator               = true
   organization_aggregation_source = ({
     all_regions = true
     regions     = null
@@ -59,12 +59,11 @@ module "organization_aggregation" {
 
 ```hcl
 module "existing_bucket" {
-  source  = "playgroundtech/config/aws"
-  version = "1.0.0"
-  s3_bucket_name    = var.s3_bucket_name
-  create_bucket     = false
-
-  create_aggregator = true
+  source                     = "playgroundtech/config/aws"
+  version                    = "1.0.0"
+  s3_bucket_name             = var.s3_bucket_name
+  create_bucket              = false
+  create_aggregator          = true
   account_aggregation_source = ({
     account_ids = ["123456789101"]
     all_regions = true
